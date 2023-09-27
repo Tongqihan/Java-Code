@@ -168,4 +168,31 @@ public class TestBinaryTree {
         if (rightTree != null) return rightTree;
         return null;
     }
+
+//    判断二叉树是否为完全二叉树
+//    利用队列
+    public boolean isCompleteTree(TreeNode root) {
+        if (root == null) {
+            return true;  // 空树是一棵完全二叉树
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.poll();
+            if (cur != null) {
+                queue.offer(cur.left);
+                queue.offer(cur.right);
+            } else {
+                break;
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            TreeNode tmp = queue.poll();
+            if (tmp != null) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

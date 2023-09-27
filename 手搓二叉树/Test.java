@@ -32,6 +32,10 @@ public class Test {
         List<List<Integer>> ret = testBinaryTree.levelOrder2(root);
         System.out.println(ret);
         System.out.println("------------------------------------------");
+        System.out.println("是否为完全二叉树: ");
+        boolean ret2 = testBinaryTree.isCompleteTree(root);
+        System.out.println(ret2);
+        System.out.println("------------------------------------------");
     }
     public static void main2(String[] args) {
         TestBinaryTree testBinaryTree = new TestBinaryTree();
