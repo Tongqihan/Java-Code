@@ -6,6 +6,22 @@ public class Test {
     public static void main(String[] args) {
         TestBinaryTree testBinaryTree = new TestBinaryTree();
         TestBinaryTree.TreeNode root = testBinaryTree.createTree();
+        System.out.println("非递归前序遍历为: ");
+        testBinaryTree.preOrderNor(root);
+        System.out.println();
+        System.out.println("-----------------");
+        System.out.println("非递归中序遍历为: ");
+        testBinaryTree.inOrderNor(root);
+        System.out.println();
+        System.out.println("-----------------");
+        System.out.println("非递归后序遍历为: ");
+        testBinaryTree.postOrderNor(root);
+        System.out.println();
+        System.out.println("-----------------");
+    }
+    public static void main3(String[] args) {
+        TestBinaryTree testBinaryTree = new TestBinaryTree();
+        TestBinaryTree.TreeNode root = testBinaryTree.createTree();
         int size = testBinaryTree.size(root);
         System.out.println("nodeSize: " + size);
         testBinaryTree.size2(root);
