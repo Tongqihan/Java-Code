@@ -1,6 +1,8 @@
 package Heap;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class TestHeap {
     public int[] elem;
@@ -91,5 +93,30 @@ public class TestHeap {
     public int peek() {
         if (isEmpty()) return -1;
         return elem[0];
+    }
+
+    public int[] smallestK(int[] arr, int k) {
+
+        int[] ret = new int[k];
+        if (arr == null || k == 0) return ret;  // 必须返回一个空的数组
+
+        Queue<Integer> maxHeap = new PriorityQueue<>(k, (a, b) -> b - a);
+        // 1.遍历数组的前 K 个，放到堆当中
+        for (int i = 0; i < k; i++) {
+            maxHeap.offer(arr[i]);
+        }
+
+        // 2.遍历剩下的 K - 1 个，每次和堆顶元素进行比较
+        for (int i = k; i < arr.length; i++) {
+            if (arr[i] < maxHeap.peek()) {
+                maxHeap.poll();
+                maxHeap.offer(arr[i]);
+            }
+        }
+
+        for (int i = 0; i < k; i++) {
+            ret[i] = maxHeap.poll();
+        }
+        return ret;
     }
 }
