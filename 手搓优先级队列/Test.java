@@ -59,6 +59,14 @@ class Incmp implements Comparator<Integer> {
 
 public class Test {
     public static void main(String[] args) {
+        TestHeap testHeap = new TestHeap();
+        int[] array = {27, 15, 19, 18, 28, 34, 65, 49, 25, 37};
+        testHeap.initElem(array);
+        testHeap.createHeap();
+        testHeap.heapSort();
+        System.out.println();
+    }
+    public static void main8(String[] args) {
 //        lambda 表达式
         Queue<Integer> priorityQueue = new PriorityQueue<>((o1, o2) -> {return o2.compareTo(o1);});
         priorityQueue.offer(1);

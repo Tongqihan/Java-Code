@@ -95,6 +95,7 @@ public class TestHeap {
         return elem[0];
     }
 
+//    TOP-K
     public int[] smallestK(int[] arr, int k) {
 
         int[] ret = new int[k];
@@ -118,5 +119,24 @@ public class TestHeap {
             ret[i] = maxHeap.poll();
         }
         return ret;
+    }
+
+//    交换
+    public void swap(int[] arr, int i, int j) {
+        int tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+    }
+
+//    堆排序
+//    空间复杂度 O(1)
+//    时间复杂度 O(N × logN)
+    public void heapSort() {
+        int end = usedSize - 1;
+        while (end > 0) {
+            swap(elem, 0, end);
+            shiftDown(0, end);
+            end--;
+        }
     }
 }
