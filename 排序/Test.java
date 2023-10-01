@@ -11,11 +11,12 @@ public class Test {
 //            逆序的最慢
             array[i] = array.length - i;
         }
+
     }
     public static void initArrayNotOrder(int[] array) {
         Random random = new Random();
         for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt(1000_00000);
+            array[i] = random.nextInt(1_0000_0000);
         }
     }
     public static void testInsertSort(int[] array) {
@@ -59,14 +60,28 @@ public class Test {
         System.out.println("冒泡排序耗时：" + (endTime - startTime));
     }
 
+    public static void testQuickSort(int[] array) {
+        array = Arrays.copyOf(array, array.length);
+        long startTime = System.currentTimeMillis();
+        Sort.QuickSort(array);
+        long endTime = System.currentTimeMillis();
+//        System.out.println(Arrays.toString(array));
+        System.out.println("快速排序耗时：" + (endTime - startTime));
+    }
+
     public static void main(String[] args) {
-        int[] array = new int[1000_00000];
-        initArrayOrder(array);
-//        initArrayNotOrder(array);
+//        int[] array = {12, 45, 36, 9, 7, 6, 98, 21};
+
+//        我掏出一个亿的数据，请问阁下该如何应对呢
+//        证实，随机数，快排碾压希尔和堆排
+        int[] array = new int[1_0000_0000];
+//        initArrayOrder(array);
+        initArrayNotOrder(array);
 //        testInsertSort(array);
-        testShellSort(array);
 //        testSelectSort(array);
-        testHeapSort(array);
 //        testBubbleSort(array);
+        testShellSort(array);
+        testHeapSort(array);
+        testQuickSort(array);
     }
 }

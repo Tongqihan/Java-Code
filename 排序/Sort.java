@@ -165,4 +165,127 @@ public class Sort {
             }
         }
     }
+
+//    快速排序
+//    时间复杂度 O(N * logN)
+//    最好情况：O(N * logN)
+//    最坏情况：O(N ^ 2) - 单分支的树 - 有序或者逆序
+//
+//    空间复杂度
+//    最好情况：O(logN)
+//    最坏情况：O(N)
+//
+//    稳定性：不稳定
+//
+//    如果数据量过大的时候，可能会跑不过，发生栈溢出异常
+//    我们要进行优化
+
+//    挖坑法
+    public static void QuickSort(int[] array) {
+        Quick(array, 0, array.length - 1);
+    }
+
+    private static void Quick(int[] array, int start, int end) {
+        if (start >= end) return;
+
+//        使用这个优化，主要解决减少递归次数
+        if (end - start + 1 <= 14) {
+//            直接插入排序
+            InsertSort2(array, start, end);
+            return;
+        }
+//        三数取中法
+        int index = midThree(array, start, end);
+        swap(array, start, index);
+        int pivot = partition3(array, start, end);  // 划分
+        Quick(array, start, pivot - 1);
+        Quick(array, pivot + 1, end);
+    }
+
+    private static void InsertSort2(int[] array, int left, int right) {
+
+        for (int i = left + 1; i <= right; i++) {
+            int j = i - 1;
+            int tmp = array[i];
+            for (; j >= left; j--) {
+                if (array[j] > tmp) {
+                    array[j + 1] = array[j];
+                } else {
+                    break;
+                }
+            }
+            array[j + 1] = tmp;
+        }
+    }
+
+    private static int midThree(int[] array, int left, int right) {
+        int mid = (left + right) / 2;
+        if (array[left] < array[right]) {
+            if (array[mid] < array[left]) {
+                return left;
+            } else if (array[mid] > array[right]) {
+                return right;
+            } else {
+                return mid;
+            }
+        } else {
+            if (array[mid] < array[right]) {
+                return right;
+            } else if (array[mid] > array[left]) {
+                return left;
+            } else {
+                return mid;
+            }
+        }
+    }
+
+    private static int partition(int[] array, int left, int right) {
+        int tmp = array[left];
+        while (left < right) {
+            while (left < right && array[right] >= tmp) {
+                right--;
+            }
+            array[left] = array[right];
+            while (left < right && array[left] <= tmp) {
+                left++;
+            }
+            array[right] = array[left];
+        }
+        array[left] = tmp;
+        return left;
+    }
+
+//    Hoare
+//    right 找到比基准小的停下来
+//    left 找到比基准大的停下来
+//    交换
+    private static int partition2(int[] array, int left, int right) {
+        int tmp = array[left];
+        int i = left;
+        while (left < right) {
+            while (left < right && array[right] >= tmp) {
+                right--;
+            }
+            while (left < right && array[left] <= tmp) {
+                left++;
+            }
+            swap(array, left, right);
+        }
+        swap(array, left, i);
+        return left;
+    }
+
+//    前后指针法
+    private static int partition3(int[] array, int left, int right) {
+        int prev = left;
+        int cur = left + 1;
+        while (cur <= right) {
+            if (array[cur] < array[left] && array[++prev] != array[cur]) {
+                swap(array, cur, prev);
+            }
+            cur++;
+        }
+        swap(array, prev, left);
+        return prev;
+    }
 }
