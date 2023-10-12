@@ -4,6 +4,15 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
+        int[] array = func10();
+        System.out.println(Arrays.toString(array));
+    }
+    private static int[] func10() {
+//        数组做返回值
+        int[] tmpArray = {10, 20, 30};
+        return tmpArray;
+    }
+    public static void main1(String[] args) {
         int[] array1 = {1, 2, 3, 4};
         func1(array1);
         func2(array1);
